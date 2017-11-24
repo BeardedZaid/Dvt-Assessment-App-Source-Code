@@ -1,0 +1,32 @@
+<!-- View for setting preferences and filters of categories to be displayed in Groups Page -->
+
+<div class="page" ng-controller="CategoryController as cat">
+	<div class="col-md-2">
+		<h3 class="short-header" >Settings</h3>
+	</div>
+	<br/>
+		<div class="container">
+			<div class="form-group">
+				  <label for="Select">Select a Preferred Category</label>
+				  <!-- Data binding select box to preferred category in CategoryController-->
+				  <select id="Select" class="form-control" ng-model="cat.prefCategory" >
+					<!-- Displaying all categories in select element-->
+					<option ng-repeat="category in cat.categories.results" ><strong>{{category.name}}</strong></option>
+				  </select>
+				<br/>
+				
+				<h4> Additional Filters </h4>
+				<br/>
+				<!-- Displaying all categories in checkboxes-->
+				<div class="checkbox col-md-3" ng-repeat="category in cat.categories.results" ng-hide="{{cat.categories.results}} == cat.prefCategory">
+				  <label><!-- Each checkbox corresponds to adding a category when clicked-->
+					<input id="check" type="checkbox" ng-click="cat.addCat(category.name)"/><strong>{{category.name}}</strong>
+				  </label>
+				</div>
+			</div>
+		</div>
+		<div class="container">
+		<!-- Button to save preferences-->
+		<button class="btn btn-primary" type="submit" ng-click="cat.savePreferred(cat.prefCategory)">Save Preferences</button>
+		</div>
+</div>

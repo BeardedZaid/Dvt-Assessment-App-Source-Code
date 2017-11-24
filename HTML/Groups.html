@@ -1,0 +1,22 @@
+<!-- View for displaying groups based on categories filtered in Settings Page-->
+
+<div ng-controller="GroupController as vm">
+	<input type="text" class="form-control" id="inputEmail3" placeholder="Search" ng-model="vm.search" />
+	<br/>
+	<div class="grid_3 grid_5">
+	<div ng-repeat="cat in vm.additionalCat track by $index">
+	<div class="col-md-4 col-sm-5 tab-image" data-wow-duration=".8s" data-wow-delay=".2s" ng-repeat="group in vm.groups.data| filter : vm.search" ng-if="group.category.name == vm.pCategory || group.category.name == cat">
+		<div class="tch-img">
+			<a href="{{group.link}}"><img ng-src="{{group.group_photo.highres_link || 'images/def.jpg'}}" style="height:180px;width:310px" class="img-responsive" /></a>
+		</div>
+		<h3><a href="{{group.link}}" ui-tooltip="{{group.name}}">{{group.name  | limitTo : 22}}...</a></h3>
+		<h6>BY <a href="{{group.link}}">{{group.organizer.name | uppercase}} </a>{{group.created | date : longDate}}</h6>
+				<!--<p>{{group.description  | limitTo : 100}}...</p>-->
+				<h6>{{group.category.name  | uppercase}}</h6>
+		<div class="bht1"><a href="{{group.link}}">Visit Group Page</a></div>
+		
+	</div>
+	</div>
+	<div class="clearfix"></div>
+	</div>
+</div>
